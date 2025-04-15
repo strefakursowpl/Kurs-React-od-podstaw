@@ -2,10 +2,10 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import './index.css';
-import { ReducerComponent } from "./reducer";
+import { Main } from "./optimization";
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-		<ReducerComponent />
+		<Main />
 	</StrictMode>,
 );
