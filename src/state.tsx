@@ -28,6 +28,7 @@
 // 9. Jeżeli komponent zostaje usunięty, state również jest niszczony.
 
 import { useState } from 'react';
+import { Button } from "./components/ui/button";
 
 export function Counter() {
 	const [counter, setCounter] = useState(0);
@@ -52,17 +53,21 @@ export function Counter() {
     console.log('Render Counter');
 
 	return (
-		<div style={{ width: '100vw', textAlign: 'center' }}>
+		<div className="text-center w-screen bg-amber-300 p-10">
             <h1>{text}</h1>
-			<div style={{ fontSize: '30px', marginBottom: '30px' }}>
+			<div className="text-5xl my-7 font-bold">
 				{counter}
 			</div>
-			<button onClick={increment}>Dodaj 1</button>
-			<button onClick={decrement}>Odejmij 1</button>
-			<button onClick={reset}>Resetuj</button>
-			<button onClick={modifyPerson}>Modyfikuj obiekt</button>
-			<div>
-				<button
+			<div className="flex gap-5 justify-center">
+			<Button
+			className="hover:bg-blue-700 border-2 border-blue-700 bg-red-500 text-white"
+			variant={'outline'} onClick={increment}>Dodaj 1</Button>
+				<Button onClick={decrement}>Odejmij 1</Button>
+				<Button onClick={reset}>Resetuj</Button>
+				<Button onClick={modifyPerson}>Modyfikuj obiekt</Button>
+			</div>
+			<div className="mt-10">
+				<Button
 					onClick={() => {
 						// doda tylko 1
 						// setCounter(counter + 1);
@@ -75,7 +80,7 @@ export function Counter() {
 						setCounter(prevCounter => prevCounter + 1);
 					}}>
 					Dodaj 3
-				</button>
+				</Button>
 			</div>
             <Input value={text} onChange={value => setText(value)} />
 		</div>
