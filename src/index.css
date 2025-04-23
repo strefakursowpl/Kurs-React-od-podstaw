@@ -89,6 +89,7 @@
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+  --color-gray2: var(--gray);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
@@ -134,4 +135,11 @@
   @media (min-width: theme(screens.lg)) {
     padding-inline: 2rem;
   }
+}
+
+/* animate-duration-[15s] */
+/* animate-duration-150 */
+@utility animate-duration-* {
+  animation-duration: --value([*]);
+  animation-duration: calc(--value(integer) * 100ms);
 }
