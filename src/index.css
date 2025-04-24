@@ -118,6 +118,16 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --animate-scale-in: scale-in 20s infinite;
+
+  @keyframes scale-in {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.3);
+    }
+  }
 }
 
 @layer base {
@@ -142,4 +152,19 @@
 @utility animate-duration-* {
   animation-duration: --value([*]);
   animation-duration: calc(--value(integer) * 100ms);
+}
+
+@layer components {
+  .clip-path1 {
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% 10%,
+      100% 90%,
+      90% 100%,
+      10% 100%,
+      0 90%,
+      0 10%
+    );
+  }
 }

@@ -6,6 +6,7 @@ import Features from '@/components/homepage/features';
 import Intro from '@/components/homepage/intro';
 
 import 'wow.js/css/libs/animate.css';
+import Hero from "@/components/homepage/hero.js";
 
 export default function HomePage() {
 	useEffect(() => {
@@ -21,6 +22,7 @@ export default function HomePage() {
 	return (
 		<main className="bg-white">
 			<title>Techbe</title>
+			<Hero />
 			<Features />
 			<Intro />
 		</main>
