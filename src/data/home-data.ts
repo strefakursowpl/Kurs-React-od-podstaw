@@ -51,3 +51,30 @@ export const features = [
 		delay: '.8s',
 	},
 ];
+
+export const testimonials = [
+	{
+		id: 1,
+		imageSrc: '/images/avatar1.jpg',
+		name: 'Artur Kowalski',
+		designation: 'Web Developer Freelancer',
+		stars: 5,
+		text: 'Techbe całkowicie odmieniło mój proces tworzenia i utrzymywania stron internetowych. Użyteczny interfejs i trafione funkcje sprawiają, że korzystanie z aplikacji jest przyjemnością.',
+	},
+	{
+		id: 2,
+		imageSrc: '/images/avatar2.jpg',
+		name: 'Anna',
+		designation: 'Grafik z Origami Solutions',
+		stars: 5,
+		text: 'Dzięki Techbe możemy bezpiecznie patrzeć w przyszłość, wiemy jak będą wyglądać nasze finanse i wiemy jak zaoszczędzić.',
+	},
+	{
+		id: 3,
+		imageSrc: '/images/avatar3.jpg',
+		name: 'Mateusz Zieliński',
+		designation: 'Administrator systemów Linux',
+		stars: 5,
+		text: 'Plan Biznes Plus okazał się strzałem w dziesiątkę. Dzięki niemu możemy zaoszczędzić czas na zarządzaniu budżetem i bardziej skupić się na biznesie.',
+	},
+];

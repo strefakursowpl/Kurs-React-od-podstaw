@@ -1,6 +1,9 @@
+import Header from "../ui/header";
+import Section from "../ui/section";
+
 export default function Intro() {
     return (
-        <section className="overflow-hidden py-14 lg:py-28 bg-[url(/bg/gray-waves-bg.png)]">
+        <Section className="bg-[url(/bg/gray-waves-bg.png)]">
             <div className="container max-w-[1300px]">
                 <div className="grid gap-14 lg:grid-cols-2">
                     <div className="relative wow fadeInUp" data-wow-delay=".3s">
@@ -36,18 +39,12 @@ export default function Intro() {
                         </div>
                     </div>
                     <div className="wow fadeInUp" data-wow-delay=".6s">
-                        <div className="mx-auto max-w-[645px]">
-                            <div
-                            data-wow-delay=".3s"
-                            className="wow fadeInUp mb-2.5 text-left bg-clip-text text-sm lg:text-base font-bold text-transparent bg-linear-(--gradient2) uppercase">
-                               O aplikacji
-                            </div>
-                            <h2
-                            data-wow-delay=".6s"
-                            className="text-foreground wow fadeInUp mb-12 text-left text-xl font-extrabold lg:text-4xl">
-                                Zwiększamy Twoją efektywność i świadomość budowania budżetu
-                            </h2>
-                        </div>
+                        <Header
+                            title="Zwiększamy Twoją efektywność i świadomość budowania budżetu"
+                            subTitle="O aplikacji"
+                            subTitleClass="text-left"
+                            titleClass="text-left"
+                        />
                         <p className="text-gray2 mb-4 text-base leading-7">
                             Dzięki temu narzędziu nauczysz się jak skalować biznes.
                             Będziesz mógł prześledzić wszystkie swoje wydatki i przychody,
@@ -91,6 +88,6 @@ export default function Intro() {
                     </div>
                 </div>
             </div>
-        </section>
+        </Section>
     )
 }

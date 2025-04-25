@@ -10,6 +10,7 @@ import { ArrowRightIcon, MoveLeftIcon, MoveRightIcon } from 'lucide-react';
 import { EffectFade, Navigation } from 'swiper/modules';
 
 import { Button } from '../ui/button';
+import SwiperButton from "../ui/swiper-button";
 
 export default function Hero() {
 	return (
@@ -52,16 +53,8 @@ export default function Hero() {
 					</SwiperSlide>
 				))}
 			</Swiper>
-			<button
-				id="slider-prev"
-				className="border-primary absolute top-[75%] left-[2%] z-10 flex size-14 cursor-pointer items-center justify-center rounded-full border bg-transparent hover:bg-linear-(--gradient) lg:top-[53%]">
-				<MoveLeftIcon className="stroke-border" />
-			</button>
-			<button
-				id="slider-next"
-				className="border-primary absolute top-[75%] right-[2%] z-10 flex size-14 cursor-pointer items-center justify-center rounded-full border bg-transparent hover:bg-linear-(--gradient) lg:top-[53%]">
-				<MoveRightIcon className="stroke-border" />
-			</button>
+			<SwiperButton direction="left" className="top-[75%] left-[2%] lg:top-[53%]" />
+			<SwiperButton direction="right" className="top-[75%] right-[2%] lg:top-[53%]" />
 		</section>
 	);
 }
