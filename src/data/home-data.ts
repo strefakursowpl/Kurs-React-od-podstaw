@@ -78,3 +78,54 @@ export const testimonials = [
 		text: 'Plan Biznes Plus okazał się strzałem w dziesiątkę. Dzięki niemu możemy zaoszczędzić czas na zarządzaniu budżetem i bardziej skupić się na biznesie.',
 	},
 ];
+
+export const pricingPlans = [
+	{
+		id: 1,
+		badge: 'Plan Darmowy',
+		price: '00.00 zł',
+		period: 'Dożywotnio',
+		features: [
+			'Idealny na spróbowanie',
+			'Portfele',
+			'Historia transakcji',
+			'Wykres roczny',
+			'Wykresy kołowe',
+			'Dostęp do wszystkich kategorii',
+		],
+		buyText: 'Sprawdź',
+		delay: '.3s',
+	},
+	{
+		id: 2,
+		badge: 'Plan Premium',
+		price: '30.00 zł',
+		period: 'Na miesiąc',
+		features: [
+			'Idealny na start',
+			'Nielimitowane portfele',
+			'Nielimitowana historia transakcji',
+			'Import/Export transakcji',
+			'Kopie zapasowe w bazie danych',
+			'Zaawansowane filtry',
+		],
+		buyText: 'Kup teraz',
+		delay: '.6s',
+	},
+	{
+		id: 3,
+		badge: 'Plan Biznes Plus',
+		price: '100.00 zł',
+		period: 'Na miesiąc',
+		features: [
+			'Idealny dla dużego biznesu',
+			'Integracja rachunków bankowych',
+			'Transakcje zaawansowane',
+			'Tworzenie własnych kategorii',
+			'Planer finansów',
+			'Opiekun techniczny',
+		],
+		buyText: 'Kup teraz',
+		delay: '.9s',
+	},
+];

@@ -8,6 +8,8 @@ import Intro from '@/components/homepage/intro';
 import 'wow.js/css/libs/animate.css';
 import Hero from "@/components/homepage/hero.js";
 import Testimonials from "@/components/homepage/testimonials.js";
+import Pricing from "@/components/homepage/pricing.js";
+import Copyright from "@/components/layout/copyright.js";
 
 export default function HomePage() {
 	useEffect(() => {
@@ -27,6 +29,8 @@ export default function HomePage() {
 			<Features />
 			<Intro />
 			<Testimonials />
+			<Pricing />
+			<Copyright />
 		</main>
 	);
 }
