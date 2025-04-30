@@ -19,6 +19,8 @@ export default function HomePage() {
 
 		// @ts-expect-error - missing type declarations
 		import('../../public/js/tilt.min.js');
+		// @ts-expect-error - missing types
+		window.VanillaTilt?.init(document.querySelectorAll('[data-tilt]'));
 	}, []);
 
 	return (
