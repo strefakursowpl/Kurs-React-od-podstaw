@@ -137,6 +137,23 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-image: url(shapes/shape1.png);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-attachment: fixed;
+  }
+  #root {
+    background-image: url(shapes/shape2.png);
+    background-repeat: no-repeat;
+    background-position: 0 50%;
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+  h1, h2 {
+    @apply text-foreground scroll-m-20 text-2xl font-extrabold lg:text-4xl;
+  }
+  h3 {
+    @apply text-foreground scroll-m-20 text-lg font-medium lg:text-xl;
   }
 }
 
