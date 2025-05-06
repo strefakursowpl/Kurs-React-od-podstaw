@@ -4,6 +4,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { PlusIcon, WalletIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
+import WalletForm from "./wallet-form";
 
 export default function WalletCard() {
 
@@ -34,7 +35,7 @@ export default function WalletCard() {
                                 <DialogTitle asChild>
                                     <h3>Dodaj nowy portfel lub konto</h3>
                                 </DialogTitle>
-                                Tutaj będzie formularz...
+                                <WalletForm />
                             </ScrollArea>
                         </DialogHeader>
                     </DialogContent>
