@@ -11,6 +11,10 @@ import WalletsPage from "./pages/wallets-page";
 import TransactionsPage from "./pages/transactions-page";
 import SummaryPage from "./pages/summary-page";
 import NotFoundPage from "./pages/not-found-page";
+import { setErrorMap } from "zod";
+import { customErrorMap } from "./lib/error-map";
+
+setErrorMap(customErrorMap);
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
