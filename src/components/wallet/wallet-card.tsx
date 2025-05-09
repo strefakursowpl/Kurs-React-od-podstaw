@@ -4,11 +4,62 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { PlusIcon, WalletIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
-import WalletForm from "./wallet-form";
+import WalletForm, { TWalletSchema } from "./wallet-form";
+import { TWallet } from "@/types";
 
 export default function WalletCard() {
 
     const [open, setOpen] = useState(false);
+
+    const [wallets, setWallets] = useState<TWallet[]>([]);
+
+    const [editedWallet, setEditedWallet] = useState<TWallet | undefined>();
+
+    function submit(data: TWalletSchema) {
+
+        let newWallets;
+
+        if(editedWallet) {
+            newWallets = wallets.map(val => {
+                if(val.id === editedWallet.id) {
+                    return {
+                        id: editedWallet.id,
+                        name: data.name,
+                        value: data.value,
+                        isAccount: data.isAccount,
+                    }
+                }
+                return val;
+            });
+        } else {
+            newWallets = [
+                ...wallets,
+                {
+                    id: crypto.randomUUID(),
+                    name: data.name,
+                    value: data.value,
+                    isAccount: data.isAccount,
+                }
+            ];
+        }
+
+        setWallets(newWallets);
+        setEditedWallet(undefined);
+        setOpen(false);
+    }
+
+    function edit(id: string) {
+        setEditedWallet(
+            wallets.find(val => val.id === id)
+        );
+        setOpen(true);
+    }
+
+    function remove(id: string) {
+        setWallets(
+            wallets.filter(val => val.id !== id)
+        );
+    }
 
     return (
         <Card className="border-b-secondary overflow-hidden border-b-[6px]">
@@ -35,7 +86,7 @@ export default function WalletCard() {
                                 <DialogTitle asChild>
                                     <h3>Dodaj nowy portfel lub konto</h3>
                                 </DialogTitle>
-                                <WalletForm />
+                                <WalletForm onSubmit={submit} editedWallet={editedWallet} />
                             </ScrollArea>
                         </DialogHeader>
                     </DialogContent>

@@ -6,6 +6,7 @@ import { Form } from "../ui/form";
 import SwitchField from "../fields/switch-field";
 import InputField from "../fields/input-field";
 import { Button } from "../ui/button";
+import { TWallet } from "@/types";
 
 const walletSchema = object({
     name: string().min(2).max(256),
@@ -16,24 +17,25 @@ const walletSchema = object({
 export type TWalletSchema = z.infer<typeof walletSchema>
 
 type TProps = {
-    props: string
+    onSubmit: (v: TWalletSchema) => void,
+    editedWallet?: TWallet
 }
 
-export default function WalletForm({props}: TProps) {
+export default function WalletForm({onSubmit, editedWallet}: TProps) {
 
     const form = useForm<TWalletSchema>({
         resolver: zodResolver(walletSchema),
         mode: 'onTouched',
         defaultValues: {
-            name: '',
-            value: 0,
-            isAccount: false
+            name: editedWallet?.name ?? '',
+            value: editedWallet?.value,
+            isAccount: editedWallet?.isAccount ?? false
         },
     });
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit((data) => console.log(data))} className="space-y-5 mt-2">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5 mt-2">
                 <SwitchField
                     control={form.control}
                     name="isAccount"
