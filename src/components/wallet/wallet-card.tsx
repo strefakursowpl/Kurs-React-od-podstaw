@@ -4,67 +4,22 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { PlusIcon, WalletIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
-import WalletForm, { TWalletSchema } from "./wallet-form";
-import { TWallet } from "@/types";
+import WalletForm from "./wallet-form";
 import { WalletContext } from "@/context";
 import WalletList from "./wallet-list";
+import useWallets from "@/hooks/use-wallets";
 
 export default function WalletCard() {
 
     const [open, setOpen] = useState(false);
 
-    const [wallets, setWallets] = useState<TWallet[]>([]);
-
-    const [editedWallet, setEditedWallet] = useState<TWallet | undefined>();
-
-    function submit(data: TWalletSchema) {
-
-        let newWallets;
-
-        if(editedWallet) {
-            newWallets = wallets.map(val => {
-                if(val.id === editedWallet.id) {
-                    return {
-                        id: editedWallet.id,
-                        name: data.name,
-                        value: data.value,
-                        isAccount: data.isAccount,
-                    }
-                }
-                return val;
-            });
-        } else {
-            newWallets = [
-                ...wallets,
-                {
-                    id: crypto.randomUUID(),
-                    name: data.name,
-                    value: data.value,
-                    isAccount: data.isAccount,
-                }
-            ];
-        }
-
-        setWallets(newWallets);
-        setEditedWallet(undefined);
-        setOpen(false);
-    }
-
-    function edit(id: string) {
-        setEditedWallet(
-            wallets.find(val => val.id === id)
-        );
-        setOpen(true);
-    }
-
-    function remove(id: string) {
-        setWallets(
-            wallets.filter(val => val.id !== id)
-        );
-    }
+    const { wallets, editedWallet, setEditedWallet, actions } = useWallets();
 
     return (
-        <WalletContext value={{remove, edit}}>
+        <WalletContext value={{ remove: actions.remove, edit: id => {
+            actions.edit(id);
+            setOpen(true);
+        } }}>
             <Card className="border-b-secondary overflow-hidden border-b-[6px]">
                 <Dialog open={open} onOpenChange={isOpen => {
                     setEditedWallet(undefined);
@@ -92,7 +47,10 @@ export default function WalletCard() {
                                     <DialogTitle asChild>
                                         <h3>Dodaj nowy portfel lub konto</h3>
                                     </DialogTitle>
-                                    <WalletForm onSubmit={submit} editedWallet={editedWallet} />
+                                    <WalletForm onSubmit={data => {
+                                        actions.submit(data);
+                                        setOpen(false);
+                                    }} editedWallet={editedWallet} />
                                 </ScrollArea>
                             </DialogHeader>
                         </DialogContent>

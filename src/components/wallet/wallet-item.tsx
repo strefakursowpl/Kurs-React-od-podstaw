@@ -23,7 +23,7 @@ export default function WalletItem({wallet: {id, isAccount, name, value}}: TProp
             <TableCell className="text-right">
                 <DropdownMenu modal={false}>
                     <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="size-8 p-0">
+                        <Button variant="ghost" size="sm" className="size-8 p-0">
                             <span className="sr-only">Otwórz menu</span>
                             <MoreHorizontalIcon />
                         </Button>
