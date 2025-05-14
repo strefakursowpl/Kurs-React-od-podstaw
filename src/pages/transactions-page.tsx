@@ -1,3 +1,4 @@
+import TransactionCard from "@/components/transaction/transaction-card";
 import TransactionSidebar from "@/components/transaction/transaction-sidebar";
 import AppSection from "@/components/ui/app-section";
 import { CategoryContext } from "@/context";
@@ -21,6 +22,7 @@ export default function TransactionsPage() {
                     }}
                 >
                     <TransactionSidebar />
+                    <TransactionCard />
                 </CategoryContext>
             </div>
         </AppSection>

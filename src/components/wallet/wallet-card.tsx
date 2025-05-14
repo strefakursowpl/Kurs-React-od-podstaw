@@ -8,6 +8,7 @@ import WalletForm from "./wallet-form";
 import { WalletContext } from "@/context";
 import WalletList from "./wallet-list";
 import useWallets from "@/hooks/use-wallets";
+import CardHeadline from "../ui/card-headline";
 
 export default function WalletCard() {
 
@@ -26,14 +27,11 @@ export default function WalletCard() {
                     return setOpen(isOpen);
                 }}>
                     <CardHeader className="flex flex-row flex-wrap items-center justify-between gap-4">
-                        <div>
-                            <h1 className="flex items-center gap-3">
-                                <WalletIcon /> Portfele
-                            </h1>
-                            <CardDescription>
-                                Tutaj dodasz konto lub portfel
-                            </CardDescription>
-                        </div>
+                        <CardHeadline
+                            title="Portfele"
+                            description="Tutaj dodasz konto lub portfel"
+                            Icon={WalletIcon}
+                        />
                         <DialogTrigger asChild>
                             <Button>
                                 Dodaj <PlusIcon />
