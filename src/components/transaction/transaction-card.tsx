@@ -8,6 +8,7 @@ import { subCategories } from "@/data/categories-data";
 import TransactionTrends from "../ui/transaction-trends";
 import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
+import TransactionForm from "./transaction-form";
 
 export default function TransactionCard() {
 
@@ -52,7 +53,13 @@ export default function TransactionCard() {
                                 <DialogTitle asChild>
                                     <h3>Dodaj nową transakcję</h3>
                                 </DialogTitle>
-                                Tutaj będzie formularz...
+                                <TransactionForm
+                                    wallets={[]}
+                                    onSubmit={() => false}
+                                    month={5}
+                                    year={2025}
+                                    editedTransaction={undefined}
+                                />
                             </ScrollArea>
                         </DialogHeader>
                     </DialogContent>
