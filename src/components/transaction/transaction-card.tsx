@@ -9,12 +9,21 @@ import TransactionTrends from "../ui/transaction-trends";
 import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
 import TransactionForm from "./transaction-form";
+import useTransactions from "@/hooks/use-transactions";
 
 export default function TransactionCard() {
 
     const categoryContext = useContext(CategoryContext);
 
     const [open, setOpen] = useState(false);
+
+    const {
+        actions,
+        transactions,
+        wallets,
+        editedTransaction,
+        setEditedTransaction
+    } = useTransactions();
 
     const currentCategory = categoryContext?.subCategory
         ? subCategories.find(
@@ -24,7 +33,10 @@ export default function TransactionCard() {
 
     return (
         <Card className="border-b-secondary overflow-hidden border-b-[6px]">
-            <Dialog open={open} onOpenChange={setOpen}>
+            <Dialog open={open} onOpenChange={isOpen => {
+                setEditedTransaction(undefined);
+                setOpen(isOpen);
+            }}>
                 <CardHeader className="grid items-center justify-between gap-4 xl:grid-cols-3">
                     <CardHeadline
                         title="Transakcje"
@@ -54,11 +66,14 @@ export default function TransactionCard() {
                                     <h3>Dodaj nową transakcję</h3>
                                 </DialogTitle>
                                 <TransactionForm
-                                    wallets={[]}
-                                    onSubmit={() => false}
+                                    wallets={wallets}
+                                    onSubmit={data => {
+                                        actions.submit(data);
+                                        setOpen(false);
+                                    }}
                                     month={5}
                                     year={2025}
-                                    editedTransaction={undefined}
+                                    editedTransaction={editedTransaction}
                                 />
                             </ScrollArea>
                         </DialogHeader>

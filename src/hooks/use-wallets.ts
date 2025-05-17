@@ -1,10 +1,11 @@
 import { useState } from "react";
 import useLocalStorage from "./use-local-storage";
-import { TWallet } from "@/types";
+import { TTransaction, TWallet } from "@/types";
 import { TWalletSchema } from "@/components/wallet/wallet-form";
 
 export default function useWallets() {
     const [wallets, setWallets] = useLocalStorage<TWallet[]>('wallets', []);
+    const [transactions, setTransactions] = useLocalStorage<TTransaction[]>('transactions', []);
 
     const [editedWallet, setEditedWallet] = useState<TWallet | undefined>();
 
@@ -50,6 +51,9 @@ export default function useWallets() {
         setWallets(
             wallets.filter(val => val.id !== id)
         );
+
+        const newTransactions = transactions.filter(val => val.walletId !== id);
+        setTransactions(newTransactions);
     }
 
     return {
