@@ -8,6 +8,13 @@ type TWalletContext = {
 
 export const WalletContext = createContext<TWalletContext>(null);
 
+type TTransactionContext = {
+    remove: (id: string) => void,
+    edit: (id: string) => void,
+} | null
+
+export const TransactionContext = createContext<TTransactionContext>(null);
+
 export type TCategoryContext = {
     subCategory: TSubCategoryName|undefined,
     setSubCategory: (subCategory: TSubCategoryName|undefined) => void,
