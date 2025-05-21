@@ -70,7 +70,7 @@ export default function TransactionCard() {
                         />
                         <TransactionTrends
                             transactionsIncome={incomeValue}
-                            transactionExpense={expenseValue}
+                            transactionsExpense={expenseValue}
                         />
                         <div className="text-foreground border-secondary border-l-4 pl-2 text-xl font-medium">
                             Kategoria: {currentCategory}
