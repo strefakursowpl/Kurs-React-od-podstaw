@@ -12,12 +12,18 @@ import TransactionForm from "./transaction-form";
 import useTransactions from "@/hooks/use-transactions";
 import NoWalletInfo from "../ui/no-wallet-info";
 import TransactionList from "./transaction-list";
+import SelectMonth from "../ui/select-month";
+import { calcTransactionFlow, filterTransactions } from "@/lib/transaction";
 
 export default function TransactionCard() {
 
     const categoryContext = useContext(CategoryContext);
 
     const [open, setOpen] = useState(false);
+
+    const currentDate = new Date();
+    const [month, setMonth] = useState(currentDate.getMonth());
+    const [year, setYear] = useState(currentDate.getFullYear());
 
     const {
         actions,
@@ -32,6 +38,16 @@ export default function TransactionCard() {
             subCategory => subCategory.name === categoryContext.subCategory,
         )?.label
         : 'Wszystkie';
+
+    const transactionsFiltered = filterTransactions(
+        transactions,
+        categoryContext?.subCategory,
+        month,
+        year
+    );
+
+    const incomeValue = calcTransactionFlow(transactionsFiltered, true);
+    const expenseValue = calcTransactionFlow(transactionsFiltered, false);
 
     return (
         <TransactionContext value={{
@@ -53,8 +69,8 @@ export default function TransactionCard() {
                             Icon={ArrowRightLeftIcon}
                         />
                         <TransactionTrends
-                            transactionsIncome={0}
-                            transactionExpense={0}
+                            transactionsIncome={incomeValue}
+                            transactionExpense={expenseValue}
                         />
                         <div className="text-foreground border-secondary border-l-4 pl-2 text-xl font-medium">
                             Kategoria: {currentCategory}
@@ -62,6 +78,16 @@ export default function TransactionCard() {
                     </CardHeader>
                     <CardContent>
                         <div className="flex flex-wrap items-center justify-between gap-4">
+                            <SelectMonth
+                                className="flex-1"
+                                onChange={date => {
+                                    // ex. 1_2024 or 10_2025
+                                    const [selectedMonth, selectedYear] = date.split('_');
+                                    setMonth(Number(selectedMonth));
+                                    setYear(Number(selectedYear));
+                                }}
+                                value={`${month}_${year}`}
+                            />
                             <DialogTrigger asChild>
                                 <Button>
                                     Dodaj <PlusIcon />
@@ -80,8 +106,8 @@ export default function TransactionCard() {
                                             actions.submit(data);
                                             setOpen(false);
                                         }}
-                                        month={5}
-                                        year={2025}
+                                        month={month}
+                                        year={year}
                                         editedTransaction={editedTransaction}
                                     />
                                 </ScrollArea>
@@ -94,7 +120,7 @@ export default function TransactionCard() {
                                 <NoWalletInfo />
                             ) : (
                                 <TransactionList
-                                    transactions={transactions}
+                                    transactions={transactionsFiltered.reverse()}
                                 />
                             )
                         }
