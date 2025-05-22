@@ -1,6 +1,6 @@
 import useLocalStorage from "@/hooks/use-local-storage";
 import { calcTransactionFlow } from "@/lib/transaction";
-import { TTransaction, TWallet } from "@/types";
+import { TCategoryName, TTransaction, TWallet } from "@/types";
 import { useState } from "react";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import CardHeadline from "../ui/card-headline";
@@ -8,6 +8,7 @@ import { ChartColumnIncreasingIcon } from "lucide-react";
 import SelectMonth from "../ui/select-month";
 import TransactionTrends from "../ui/transaction-trends";
 import NoWalletInfo from "../ui/no-wallet-info";
+import { prepareMonthData, prepareYearData } from "@/lib/summary";
 
 export default function SummaryCard() {
 
@@ -29,6 +30,21 @@ export default function SummaryCard() {
 
     const incomeValue = calcTransactionFlow(transactionsCurrentMonth, true);
     const expenseValue = calcTransactionFlow(transactionsCurrentMonth, false);
+
+    const yearTransactionsData = prepareYearData(incomeValue, expenseValue);
+
+    const categoryIncome: Record<TCategoryName, number> = {
+        employees: 0,
+        tools: 0,
+        marketingAndSales: 0,
+        costs: 0,
+        taxesAndInvestments: 0,
+        other: 0
+    }
+
+    const categoryExpense = {...categoryIncome};
+
+    const {categoryIncomeData, categoryExpenseData} = prepareMonthData(transactionsCurrentMonth, categoryIncome, categoryExpense);
 
     return (
         <Card>
