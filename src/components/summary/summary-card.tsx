@@ -4,11 +4,13 @@ import { TCategoryName, TTransaction, TWallet } from "@/types";
 import { useState } from "react";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import CardHeadline from "../ui/card-headline";
-import { ChartColumnIncreasingIcon } from "lucide-react";
+import { ChartColumnIncreasingIcon, TrendingDownIcon, TrendingUpIcon } from "lucide-react";
 import SelectMonth from "../ui/select-month";
 import TransactionTrends from "../ui/transaction-trends";
 import NoWalletInfo from "../ui/no-wallet-info";
 import { prepareMonthData, prepareYearData } from "@/lib/summary";
+import PieChart from "../charts/pie-chart";
+import { monthChartConfig } from "@/data/charts-config-data";
 
 export default function SummaryCard() {
 
@@ -49,12 +51,12 @@ export default function SummaryCard() {
     return (
         <Card>
             <CardHeader className="flex items-center justify-between gap-4 lg:flex-row">
-                <CardHeadline
-                    title="Podsumowanie"
-                    description="W tym miejscu przejrzysz statystyki swoich wydatków lub przychodów"
-                    Icon={ChartColumnIncreasingIcon}
-                />
                 <div className="mb-2 flex flex-col items-center gap-4 sm:gap-10 sm:flex-row">
+                    <CardHeadline
+                        title="Podsumowanie"
+                        description="W tym miejscu przejrzysz statystyki swoich wydatków lub przychodów"
+                        Icon={ChartColumnIncreasingIcon}
+                    />
                     <SelectMonth
                         className="flex-1"
                         onChange={date => {
@@ -75,6 +77,44 @@ export default function SummaryCard() {
                 {
                     wallets.length === 0 && <NoWalletInfo />
                 }
+                <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+                    {
+                        expenseValue ? (
+                            <Card className="border-b-primary border-b-[6px]">
+                                <CardHeader className="flex flex-row items-center justify-center gap-2">
+                                    <h3>Wydatki</h3>
+                                    <TrendingDownIcon className="size-10 text-red-500" />
+                                </CardHeader>
+                                <CardContent>
+                                    <PieChart
+                                        config={monthChartConfig}
+                                        data={categoryExpenseData}
+                                        dataKey="value"
+                                        nameKey="category"
+                                    />
+                                </CardContent>
+                            </Card>
+                        ) : ''
+                    }
+                    {
+                        incomeValue ? (
+                            <Card className="border-b-primary border-b-[6px]">
+                                <CardHeader className="flex flex-row items-center justify-center gap-2">
+                                    <h3>Przychody</h3>
+                                    <TrendingUpIcon className="size-10 text-green-500" />
+                                </CardHeader>
+                                <CardContent>
+                                    <PieChart
+                                        config={monthChartConfig}
+                                        data={categoryIncomeData}
+                                        dataKey="value"
+                                        nameKey="category"
+                                    />
+                                </CardContent>
+                            </Card>
+                        ) : ''
+                    }
+                </div>
             </CardContent>
         </Card>
     )

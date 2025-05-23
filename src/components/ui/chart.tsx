@@ -37,9 +37,14 @@ function ChartContainer({
   className,
   children,
   config,
+  responsiveContainerProps,
   ...props
 }: React.ComponentProps<"div"> & {
-  config: ChartConfig
+  config: ChartConfig,
+  responsiveContainerProps?: Omit<
+    React.ComponentProps<typeof RechartsPrimitive.ResponsiveContainer>,
+    'children'
+  >,
   children: React.ComponentProps<
     typeof RechartsPrimitive.ResponsiveContainer
   >["children"]
@@ -59,7 +64,7 @@ function ChartContainer({
         {...props}
       >
         <ChartStyle id={chartId} config={config} />
-        <RechartsPrimitive.ResponsiveContainer>
+        <RechartsPrimitive.ResponsiveContainer {...responsiveContainerProps}>
           {children}
         </RechartsPrimitive.ResponsiveContainer>
       </div>
@@ -231,7 +236,7 @@ function ChartTooltipContent({
                       </span>
                     </div>
                     {item.value && (
-                      <span className="text-foreground font-mono font-medium tabular-nums">
+                      <span className="text-foreground ml-2 font-mono font-medium tabular-nums">
                         {item.value.toLocaleString()}
                       </span>
                     )}
@@ -251,12 +256,14 @@ const ChartLegend = RechartsPrimitive.Legend
 function ChartLegendContent({
   className,
   hideIcon = false,
+  shouldUsePercent = false,
   payload,
   verticalAlign = "bottom",
   nameKey,
 }: React.ComponentProps<"div"> &
   Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
-    hideIcon?: boolean
+    hideIcon?: boolean,
+    shouldUsePercent?: boolean,
     nameKey?: string
   }) {
   const { config } = useChart()
@@ -295,6 +302,11 @@ function ChartLegendContent({
               />
             )}
             {itemConfig?.label}
+            {' '}
+            {
+              // @ts-expect-error missing type declarations
+              shouldUsePercent && Math.round(item.payload?.percent * 100) + '%'
+            }
           </div>
         )
       })}
