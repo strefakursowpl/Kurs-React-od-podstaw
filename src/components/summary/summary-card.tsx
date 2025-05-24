@@ -10,7 +10,8 @@ import TransactionTrends from "../ui/transaction-trends";
 import NoWalletInfo from "../ui/no-wallet-info";
 import { prepareMonthData, prepareYearData } from "@/lib/summary";
 import PieChart from "../charts/pie-chart";
-import { monthChartConfig } from "@/data/charts-config-data";
+import { monthChartConfig, yearChartsConfig } from "@/data/charts-config-data";
+import BarChart from "../charts/bar-chart";
 
 export default function SummaryCard() {
 
@@ -33,7 +34,7 @@ export default function SummaryCard() {
     const incomeValue = calcTransactionFlow(transactionsCurrentMonth, true);
     const expenseValue = calcTransactionFlow(transactionsCurrentMonth, false);
 
-    const yearTransactionsData = prepareYearData(incomeValue, expenseValue);
+    const yearTransactionsData = prepareYearData(transactionsCurrentYear);
 
     const categoryIncome: Record<TCategoryName, number> = {
         employees: 0,
@@ -114,6 +115,10 @@ export default function SummaryCard() {
                             </Card>
                         ) : ''
                     }
+                </div>
+                <h2 className="mt-10">Wykres roczny</h2>
+                <div className="overflow-x-auto">
+                    <BarChart config={yearChartsConfig} data={yearTransactionsData} dataKey="month" />
                 </div>
             </CardContent>
         </Card>

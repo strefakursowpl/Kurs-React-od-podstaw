@@ -1,11 +1,15 @@
 import months from "@/data/months-data";
 import { TCategoryName, TTransaction } from "@/types";
 
-export function prepareYearData(incomeValue: number, expenseValue: number) {
-    return months.map(month => ({
+export function prepareYearData(transactionsCurrentYear: TTransaction[]) {
+    return months.map((month, i) => ({
         month,
-        incomeValue,
-        expenseValue
+        incomeValue: transactionsCurrentYear.reduce((acc, val) => {
+            return val.month === i && val.isIncome ? acc + val.value : acc
+        }, 0),
+        expenseValue: transactionsCurrentYear.reduce((acc, val) => {
+            return val.month === i && !val.isIncome ? acc + val.value : acc
+        }, 0)
     }));
 }
 
