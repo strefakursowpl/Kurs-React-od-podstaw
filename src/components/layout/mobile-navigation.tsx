@@ -6,6 +6,7 @@ import MenuLink from '../ui/menu-link';
 import HamburgerButton from './hamburger-button';
 import Logo from './logo';
 import useClickOutside from "@/hooks/use-click-outside";
+import RatesMonitor from "./rates-monitor";
 
 export default function MobileNavigation() {
 	const [open, setOpen] = useState(false);
@@ -33,7 +34,7 @@ export default function MobileNavigation() {
 								onClick={() => setOpen(false)}
 							/>
 						</div>
-						<div className="flex flex-col items-start divide-solid">
+						<nav className="flex flex-col items-start divide-solid">
 							{menu.map(item => (
 								<MenuLink
 									key={item.id}
@@ -44,6 +45,9 @@ export default function MobileNavigation() {
 									{item.name}
 								</MenuLink>
 							))}
+						</nav>
+						<div className="p-5 pt-16">
+							<RatesMonitor />
 						</div>
 					</div>
 				</div>,

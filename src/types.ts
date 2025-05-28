@@ -24,3 +24,7 @@ export type TTransaction = {
     year: number,
     isIncome: boolean
 }
+
+export type TApiRateLatest = {
+    data: Record<string, number>
+}

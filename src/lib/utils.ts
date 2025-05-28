@@ -41,3 +41,9 @@ export function createDateRange(
 
 	return asc ? monthItems : monthItems.reverse();
 }
+
+export function getRandomElement(arr: string[] | number[]) {
+	return arr[Math.floor(
+		Math.random() * arr.length
+	)]
+}
