@@ -6,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/effect-fade';
 
 import { slides } from '@/data/home-data';
-import { ArrowRightIcon, MoveLeftIcon, MoveRightIcon } from 'lucide-react';
+import { ArrowRightIcon } from 'lucide-react';
 import { EffectFade, Navigation } from 'swiper/modules';
 
 import { Button } from '../ui/button';

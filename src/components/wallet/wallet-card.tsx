@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader } from "../ui/card";
+import { Card, CardContent, CardHeader } from "../ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
 import { PlusIcon, WalletIcon } from "lucide-react";
 import { Button } from "../ui/button";
