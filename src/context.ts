@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { TCategoryName, TSubCategoryName } from "./types";
+import { TCategoryName, TCurrencies, TSubCategoryName } from "./types";
 
 type TWalletContext = {
     remove: (id: string) => void,
@@ -23,3 +23,5 @@ export type TCategoryContext = {
 } | null
 
 export const CategoryContext = createContext<TCategoryContext>(null);
+
+export const RateContext = createContext<TCurrencies|null>(null);

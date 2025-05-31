@@ -28,3 +28,5 @@ export type TTransaction = {
 export type TApiRateLatest = {
     data: Record<string, number>
 }
+
+export type TCurrencies = 'USD'|'EUR'|'GBP';
